@@ -9,9 +9,6 @@ pipeline {
     }
     stages {
       stage('CI Build and push snapshot') {
-        when {
-          branch 'PR-*'
-        }
         environment {
           PREVIEW_VERSION = "0.0.0-SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER"
           PREVIEW_NAMESPACE = "$APP_NAME-$BRANCH_NAME".toLowerCase()

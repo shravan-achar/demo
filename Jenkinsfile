@@ -1,6 +1,33 @@
 pipeline {
     agent {
-      label "jenkins-maven"
+     kubernetes {
+     label "jenkins-maven"
+      containerTemplate {
+        name 'maven'
+        image 'maven:3.3.9-jdk-8-alpine'
+        ttyEnabled true
+        command 'cat'
+      }
+      yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    some-label: maven
+spec:
+  containers:
+  - name: maven
+    image: maven:alpine
+    command:
+    - cat
+    tty: true
+  - name: busybox
+    image: busybox
+    command:
+    - cat
+    tty: true
+"""
+    }
     }
     environment {
       ORG               = 'shravan-achar'

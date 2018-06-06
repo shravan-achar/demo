@@ -1,29 +1,16 @@
 pipeline {
-    agent {
-     kubernetes {
-     label "jenkins-maven"
-      defaultContainer 'jnlp'
-      yaml """
-apiVersion: v1
-kind: Pod
-metadata:
-  labels:
-    some-label: maven
-spec:
-  containers:
-  - name: maven
-    image: maven:alpine
-    command:
-    - cat
-    tty: true
-  - name: busybox
-    image: busybox
-    command:
-    - cat
-    tty: true
-"""
+  agent {
+    kubernetes {
+      //cloud 'kubernetes'
+      label 'jenkins-maven'
+      containerTemplate {
+        name 'maven'
+        image 'maven:3.3.9-jdk-8-alpine'
+        ttyEnabled true
+        command 'cat'
+      }
     }
-    }
+  }
     environment {
       ORG               = 'shravan-achar'
       APP_NAME          = 'demo'

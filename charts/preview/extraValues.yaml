@@ -1,0 +1,10 @@
+expose:
+  config:
+    domain: 54.68.181.176.nip.io
+    exposer: ""
+    http: ""
+    tlsacme: ""
+preview:
+  image:
+    repository: 10.0.0.13:5000/shravan-achar/demo
+    tag: 0.0.0-SNAPSHOT-master-8
